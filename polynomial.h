@@ -12,7 +12,7 @@ namespace math{
 const long double EPSILON = 1e-14L;
 const long double SMALL_EPSILON = 1e-6L;
 const long double PI = 3.1415926535897932L;
-const long double E =  2.7182818284590452L;
+const long double EULERS_NUM =  2.7182818284590452L;
 const int NUM_COEFFICENTS = 30;
 
 long double factorial(int n){
@@ -110,7 +110,7 @@ long double sin(double x){
 }
 
 long double exp(double x){
-    return exp_taylor_series.evaluate(x - (int)(x + 0.5)) * pow(E, (int)(x + .5));
+    return exp_taylor_series.evaluate(x - (int)(x + 0.5)) * pow(EULERS_NUM, (int)(x + .5));
 }
 
 long double binSearch(double val, long double low, long double high, long double (*function)(double)){
@@ -135,7 +135,7 @@ long double asin(double x){
 }
 
 long double ln(double x){
-    if(x > E)
+    if(x > EULERS_NUM)
         return binSearch(x, 1, x, exp);
     else
         return binSearch(x, -1/x, 1, exp);

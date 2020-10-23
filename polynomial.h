@@ -9,11 +9,11 @@
 
 namespace math{
 
-const long double EPSILON = 1e-14L;
+const long double EPSILON       = 1e-14L;
 const long double SMALL_EPSILON = 1e-6L;
-const long double PI = 3.1415926535897932L;
-const long double EULERS_NUM =  2.7182818284590452L;
-const int NUM_COEFFICENTS = 30;
+const long double PI            = 3.1415926535897932L;
+const long double EULERS_NUM    = 2.7182818284590452L;
+const int NUM_COEFFICENTS       = 30;
 
 long double factorial(int n){
     long double product = 1;
@@ -23,19 +23,23 @@ long double factorial(int n){
     return product;
 }
 
-long double pow(double a, int b){
-    long double product = 1;
-    for(int i = 0; i < b; i++){
-        product *= a;
-    }
-    return product;
-}
-
 long double abs(double a){
     if(a > 0)
         return a;
     else
         return -a;
+}
+
+long double pow(double a, int b){
+    long double product = 1;
+    if(b < 0)
+        b = -b;
+    for(int i = 0; i < b; i++){
+        product *= a;
+    }
+    if(b < 0)
+        return 1 / product;
+    return product;
 }
 
 class Polynomial{
@@ -155,8 +159,8 @@ long double derivitive(double x, Polynomial p){
 
 long double integral(double lowerBound, double upperBound, long double (*function)(double)){
     long double sum = 0;
-    for(long double x = lowerBound; x < upperBound - EPSILON; x += SMALL_EPSILON){
-        sum += SMALL_EPSILON * function(x);
+    for(long int i = 0; i < (upperBound - lowerBound - SMALL_EPSILON) / SMALL_EPSILON; i++){
+        sum += SMALL_EPSILON * function(lowerBound + i * SMALL_EPSILON);
     }
     return sum;
 }

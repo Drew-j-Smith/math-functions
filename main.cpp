@@ -3,8 +3,24 @@
 
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 
 using namespace std;
+
+void saveToFile(double low, double high, string x, string y, long double (*function)(double)){
+    ofstream outx, outy;
+    outx.open(x, ios::out);
+    outy.open(y, ios::out);
+    if(outx && outy){
+        for(long int i = 0; i < math::abs(high - low - math::SMALL_EPSILON) * 100.0; i++){
+            outx << low + i / 100.0 << endl;
+            outy << function(low + i / 100.0) << endl;
+        }
+    }
+
+    outx.close();
+    outy.close();
+}
 
 
 int main(){
@@ -12,7 +28,7 @@ int main(){
     long double arr[] = {1, 2, 3, 4, 5};
     math::Polynomial polynomial(arr, 5);
     cout << math::derivitive(0, polynomial) << endl;
-    cout << math::integral(0, 1, polynomial) << endl;
+    // cout << math::integral(0, 1, polynomial) << endl;
     
 
     cout << setprecision(12);
@@ -38,9 +54,11 @@ int main(){
     cout << math::derivitive(0, math::sin) << endl;
     cout << math::derivitive(0, math::cos) << endl;
 
-    cout << math::integral(0, 1, math::exp) << endl;
-    cout << math::integral(0, 1, math::sin) << endl;
-    cout << math::integral(0, 1, math::cos) << endl;
+    // cout << math::integral(0, 1, math::exp) << endl;
+    // cout << math::integral(0, 1, math::sin) << endl;
+    // cout << math::integral(0, 1, math::cos) << endl;
+
+    saveToFile(0.01, 5.0, "x.txt", "y.txt", math::ln);
 
     return 0;
 }

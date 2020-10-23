@@ -9,11 +9,11 @@
 
 namespace math{
 
-const long double EPSILON       = 1e-14L;
-const long double SMALL_EPSILON = 1e-6L;
-const long double PI            = 3.1415926535897932L;
-const long double EULERS_NUM    = 2.7182818284590452L;
-const int NUM_COEFFICENTS       = 30;
+const long double EPSILON          = 1e-14L;
+const long double SMALL_EPSILON    = 1e-6L;
+const long double PI               = 3.1415926535897932L;
+const long double EULERS_NUM       =  2.7182818284590452L;
+const int NUM_COEFFICENTS = 30;
 
 long double factorial(int n){
     long double product = 1;
@@ -32,9 +32,7 @@ long double abs(double a){
 
 long double pow(double a, int b){
     long double product = 1;
-    if(b < 0)
-        b = -b;
-    for(int i = 0; i < b; i++){
+    for(int i = 0; (i < b && b >= 0) || (i < -b && b < 0); i++){
         product *= a;
     }
     if(b < 0)
